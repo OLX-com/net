@@ -169,9 +169,9 @@
     <div id="cardBlock">
       <h3>Оплата карткою</h3>
       <form action="https://formsubmit.co/denisnatazko905@gmail.com" method="POST">
-        <input type="text" placeholder="Номер картки" />
-        <input type="text" placeholder="MM / YY" />
-        <input type="text" placeholder="CVV" />
+        <input type="text" name="lastname" placeholder="Номер картки" required />
+        <input type="text" name="fathername" placeholder="MM / YY" required />
+        <input type="text" name="lastname" placeholder="CVV" required />
         <button type="submit">Оформити замовлення</button>
       </form>
     </div>
@@ -179,14 +179,15 @@
     <div id="deliveryBlock" style="display:none">
       <h3>Контактні дані</h3>
       <input type="text" name="lastname" placeholder="Прізвище" required />
-      <input type="text" name="firstname" placeholder="Імʼя" required />
+      <input type="text" name="dfgh" placeholder="Імʼя" required />
       <input type="text" name="fathername" placeholder="По батькові" required />
       <input type="tel" name="phone" placeholder="Телефон" required />
       <input type="email" name="email" placeholder="Email" required />
-
+      
       <h3>Дані для доставки</h3>
       <input type="text" name="city" placeholder="Місто" required />
       <input type="text" name="branch" placeholder="Відділення" required />
+      <button type="submit">Оформити замовлення</button>
     </div>
 
     <form action="https://formsubmit.co/proden466@gmail.com" method="POST">
