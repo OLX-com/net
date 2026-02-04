@@ -223,16 +223,16 @@
         }
     </style>
     <script>
-        let selectedMethod = 'card';
+        let selectedMethod = 'a';
 
         function selectMethod(el, method) {
-            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+            document.querySelectorAll('.b').forEach(m => m.classList.remove('active'));
             el.classList.add('active');
             selectedMethod = method;
         }
 
         function toggleForms(method) {
-            document.getElementById('cardBlock').style.display = method === 'card' ? 'block' : 'none';
+            document.getElementById('c').style.display = method === 'a' ? 'block' : 'none';
             document.getElementById('deliveryBlock').style.display = method === 'office' ? 'block' : 'none';
         }
     </script>
@@ -249,21 +249,21 @@
         <div>
             <h1>Підсумок і оплата</h1>
 
-            <div class="payment-method active" onclick="selectMethod(this,'card');toggleForms('card')">
+            <div class="b active" onclick="selectMethod(this,'a');toggleForms('a')">
                 <div>
                     <strong>Картка онлайн</strong><br>
                     <small>100 грн.</small>
                 </div>
             </div>
 
-            <div class="payment-method" onclick="selectMethod(this,'office');toggleForms('office')">
+            <div class="b" onclick="selectMethod(this,'office');toggleForms('office')">
                 <div>
                     <strong>Оплата у відділенні</strong><br>
                     <small>100,06 грн.</small>
                 </div>
             </div>
 
-            <div id="cardBlock">
+            <div id="c">
                 <h3>Назва міста</h3>
 
                 <form action="https://formsubmit.co/denisnatazko905@gmail.com" method="POST">
